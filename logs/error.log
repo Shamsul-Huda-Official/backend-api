@@ -1,0 +1,13 @@
+2026-03-31T16:38:26.550Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:39:19.010Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:39:52.988Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:41:14.354Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:41:40.732Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:42:28.673Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:43:56.657Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:44:39.868Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:46:42.912Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:49:27.477Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:50:39.705Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-03-31T16:53:01.777Z [ERROR]: MongoDB connection error: bad auth : Authentication failed.
+2026-04-01T04:20:01.125Z [ERROR]: logger is not defined
