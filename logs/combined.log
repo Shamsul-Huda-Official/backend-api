@@ -27,3 +27,7 @@
 2026-03-31T17:09:09.089Z [INFO]: MongoDB connected successfully
 2026-03-31T17:09:09.105Z [INFO]: Server is running on port 5000
 2026-04-01T04:20:01.125Z [ERROR]: logger is not defined
+2026-04-01T04:20:23.772Z [INFO]: MongoDB connected successfully
+2026-04-01T04:20:23.780Z [INFO]: Server is running on port 5000
+2026-04-01T04:24:18.936Z [INFO]: MongoDB connected successfully
+2026-04-01T04:24:18.942Z [INFO]: Server is running on port 5000
