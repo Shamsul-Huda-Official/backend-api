@@ -5,8 +5,6 @@ const classSchema = new mongoose.Schema({
         type: String, 
         required: true,
     },
-    // pending... division
-
     institutionId: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Institution',
