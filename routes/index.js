@@ -15,7 +15,7 @@ const donationRoutes = require('../modules/donation/donation.routes');
 router.get('/help', (req, res) => {
     res.json({
         success: true,
-        message: 'API is running suuccessfully',
+        message: 'API is running successfully',
     })
 })
 
