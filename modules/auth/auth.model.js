@@ -26,7 +26,7 @@ const authSchema = new mongoose.Schema({
     },
     role: {
         type: String, 
-        enum: ['admin', 'user'],
+        enum: ['super_admin' ,'admin', 'user'],
         unique: true,
     },
     institutionId: {
