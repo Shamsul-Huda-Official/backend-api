@@ -1,5 +1,5 @@
 const institutionService = require('./institution.service')
-const asyncHandler = require('../../shared/middleware/asyncHandler.middleware');
+const asyncHandler = require('../../shared/utils/asyncHandler');
 const { invalidateCache } = require('../../shared/utils/cache');
 const { successResponse } = require('../../shared/utils/resonseFormatter');
 

@@ -1,18 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { 
-    getAllInstitutions,
-    getInstitutionById,
+const {
     createInstitution,
-    updateInstitutionById,
-    deleteInstitution,
-} = require('./institution.repository')
-
+    getInstitutions,
+    getInstitutionById,
+    updateInstitution: updateInstitutionById,
+    deleteInstitution
+} = require('./institution.controller');
 const authMiddleware = require('../../shared/middleware/auth.middleware')
 const roleMiddleware = require('../../shared/middleware/role.middleware')
 
 router.route('/')
-    .get(getAllInstitutions)
+    .get(getInstitutions)
     .post(authMiddleware, roleMiddleware('super_admin'), createInstitution)
 
 router.route('/:id')
