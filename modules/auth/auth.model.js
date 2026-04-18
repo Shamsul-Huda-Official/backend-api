@@ -12,12 +12,12 @@ const authSchema = new mongoose.Schema({
     },
     phone: {
         type: String, 
-        required: true,
+        required: false,
         unique: true,
     },
     email: {
         type: String, 
-        required: true,
+        required: false,
         unique: true,
     },
     password: {
@@ -27,6 +27,7 @@ const authSchema = new mongoose.Schema({
     role: {
         type: String, 
         enum: ['super_admin' ,'admin', 'user'],
+        default: 'super_admin',
         unique: true,
     },
     institutionId: {

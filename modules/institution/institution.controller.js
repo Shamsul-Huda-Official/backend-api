@@ -17,7 +17,7 @@ exports.getInstitutions = asyncHandler(async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    const { institutions, total } = await institutionService.getInstitutions({ 
+    const { institutions, total } = await institutionService.getAllInstitution({ 
         skip, 
         limit,
         name, 

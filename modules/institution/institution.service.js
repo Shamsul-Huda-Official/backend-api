@@ -1,10 +1,14 @@
+const mongoose = require('mongoose')
+
 const institutionRepository = require('./institution.repository')
 const authRepository = require('../auth/auth.repository')
 
 const authService = require('../auth/auth.service')
 
 const createInstitution = async (data) => {
-    const { name, email, address, adminId, plan, adminName, adminEmail, adminPassword  } = data;
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    const { name, email, address, adminId, plan, adminName, adminEmail, adminPassword, adminPhone  } = data;
 
     if( !name || !email || !address || !adminEmail || !plan ) {
         throw new Error('All fields are required.')
@@ -14,8 +18,8 @@ const createInstitution = async (data) => {
         name, 
         email, 
         address,
-        plan,
-    });
+        plan
+    }, session);
 
     if(adminId) {
         const existingUser = await authRepository.findById(adminId);
@@ -30,14 +34,19 @@ const createInstitution = async (data) => {
     } else if (adminEmail && adminPassword) {
         await authService.createUser({
             name: adminName || `${name} Admin`,
-            username: adminEmail,
+            username: adminPhone,
+            phone: adminPhone,
+            email: adminEmail,
             password: adminPassword,
             role: 'admin',
             institutionId: institution._id,
-        })
+        }, session);
     } else {
         throw new Error('Admin details are required to create an institution.')
     }
+
+    await session.commitTransaction();
+    session.endSession();
 
     return institution;
 }

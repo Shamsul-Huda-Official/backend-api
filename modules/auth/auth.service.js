@@ -1,16 +1,28 @@
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authRepository = require('./auth.repository');
-const jwt_secret = require('../../shared/config/env').JWT_SECRET;
+const {JWT_SECRET} = require('../../shared/config/env');
+// const JWT_SECRET = process.env.JWT_SECRET 
 
-const createUser = async (userData) => {
+const createUser = async (userData, session = null) => {
+    const existing = await authRepository.findByUsername(userData.username);
+    if(existing) {
+        throw new Error('Username already exists');
+    }
+
     const { password } = userData;
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const cleanData = { ...userData };
+
+    if(!cleanData.phone) delete cleanData.phone;
+    if(!cleanData.email) delete cleanData.email;
+
     const user = await authRepository.createUser({
-        ...userData,
+        ...cleanData,
         password: hashedPassword,
-    })
+    }, session);
     return user;
 }
 
@@ -33,7 +45,7 @@ const loginUser = async (username, password) => {
             role: user.role,
             institutionId: user.institutionId,
         },
-        jwt_secret, 
+        JWT_SECRET, 
         { expiresIn: '1d'}
     )
     return {

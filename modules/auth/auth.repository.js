@@ -4,8 +4,8 @@ const findByUsername = async (username) => {
     return await User.findOne({ username });
 }
 
-const createUser = async (userData) => {
-    return await User.create(userData);
+const createUser = async (userData, session) => {
+    return await User.create([userData], { session });
 }
 
 module.exports = {

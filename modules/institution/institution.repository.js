@@ -1,7 +1,7 @@
 const Institution = require('./institution.model')
 
-const createInstitution = async (data) => {
-    return await Institution.create(data)
+const createInstitution = async (data, session) => {
+    return await Institution.create([data], { session });
 }
 
 const getAllInstitutions = async ({ skip = 0, limit = 10, name, search }) => {

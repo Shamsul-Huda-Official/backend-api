@@ -272,3 +272,223 @@
 2026-04-14T05:26:53.371Z [INFO]: Redis connected successfully
 2026-04-14T05:26:54.207Z [INFO]: MongoDB connected successfully
 2026-04-14T05:26:54.213Z [INFO]: Server is running on port 5000
+2026-04-14T05:29:04.977Z [INFO]: Redis connected successfully
+2026-04-14T05:29:05.662Z [INFO]: MongoDB connected successfully
+2026-04-14T05:29:05.672Z [INFO]: Server is running on port 5000
+2026-04-14T05:33:20.628Z [INFO]: Redis connected successfully
+2026-04-14T05:33:21.340Z [INFO]: MongoDB connected successfully
+2026-04-14T05:33:21.349Z [INFO]: Server is running on port 5000
+2026-04-14T05:35:00.044Z [INFO]: Redis connected successfully
+2026-04-14T05:35:00.679Z [INFO]: MongoDB connected successfully
+2026-04-14T05:35:00.694Z [INFO]: Server is running on port 5000
+2026-04-14T05:44:39.569Z [INFO]: Redis connected successfully
+2026-04-14T05:44:40.292Z [INFO]: MongoDB connected successfully
+2026-04-14T05:44:40.310Z [INFO]: Server is running on port 5000
+2026-04-14T05:45:19.127Z [INFO]: Redis connected successfully
+2026-04-14T05:45:19.703Z [INFO]: MongoDB connected successfully
+2026-04-14T05:45:19.710Z [INFO]: Server is running on port 5000
+2026-04-14T05:45:28.089Z [INFO]: Redis connected successfully
+2026-04-14T05:45:28.709Z [INFO]: MongoDB connected successfully
+2026-04-14T05:45:28.717Z [INFO]: Server is running on port 5000
+2026-04-14T05:46:21.265Z [INFO]: Redis connected successfully
+2026-04-14T05:46:22.115Z [INFO]: MongoDB connected successfully
+2026-04-14T05:46:22.120Z [INFO]: Server is running on port 5000
+2026-04-14T05:56:09.225Z [INFO]: Redis connected successfully
+2026-04-14T05:56:09.997Z [INFO]: MongoDB connected successfully
+2026-04-14T05:56:10.007Z [INFO]: Server is running on port 5000
+2026-04-14T06:03:11.076Z [INFO]: Redis connected successfully
+2026-04-14T06:03:11.749Z [INFO]: MongoDB connected successfully
+2026-04-14T06:03:11.762Z [INFO]: Server is running on port 5000
+2026-04-14T06:04:27.074Z [INFO]: Redis connected successfully
+2026-04-14T06:04:31.721Z [INFO]: MongoDB connected successfully
+2026-04-14T06:04:31.732Z [INFO]: Server is running on port 5000
+2026-04-14T06:06:19.455Z [INFO]: Redis connected successfully
+2026-04-14T06:06:20.050Z [INFO]: MongoDB connected successfully
+2026-04-14T06:06:20.059Z [INFO]: Server is running on port 5000
+2026-04-14T06:07:19.809Z [INFO]: Redis connected successfully
+2026-04-14T06:07:20.491Z [INFO]: MongoDB connected successfully
+2026-04-14T06:07:20.499Z [INFO]: Server is running on port 5000
+2026-04-14T06:08:47.649Z [INFO]: Redis connected successfully
+2026-04-14T06:08:48.365Z [INFO]: MongoDB connected successfully
+2026-04-14T06:08:48.378Z [INFO]: Server is running on port 5000
+2026-04-14T06:14:21.580Z [INFO]: Redis connected successfully
+2026-04-14T06:14:22.273Z [INFO]: MongoDB connected successfully
+2026-04-14T06:14:22.280Z [INFO]: Server is running on port 5000
+2026-04-14T06:22:56.708Z [INFO]: Redis connected successfully
+2026-04-14T06:22:57.428Z [INFO]: MongoDB connected successfully
+2026-04-14T06:22:57.441Z [INFO]: Server is running on port 5000
+2026-04-14T06:24:10.742Z [INFO]: Redis connected successfully
+2026-04-14T06:24:11.767Z [INFO]: MongoDB connected successfully
+2026-04-14T06:24:11.773Z [INFO]: Server is running on port 5000
+2026-04-14T06:25:17.682Z [INFO]: Redis connected successfully
+2026-04-14T06:25:18.297Z [INFO]: MongoDB connected successfully
+2026-04-14T06:25:18.315Z [INFO]: Server is running on port 5000
+2026-04-14T06:28:27.375Z [INFO]: Redis connected successfully
+2026-04-14T06:28:29.213Z [INFO]: MongoDB connected successfully
+2026-04-14T06:28:29.226Z [INFO]: Server is running on port 5000
+2026-04-14T06:29:26.312Z [INFO]: Redis connected successfully
+2026-04-14T06:29:26.849Z [INFO]: MongoDB connected successfully
+2026-04-14T06:29:26.858Z [INFO]: Server is running on port 5000
+2026-04-14T06:31:33.241Z [INFO]: Redis connected successfully
+2026-04-14T06:31:34.098Z [INFO]: MongoDB connected successfully
+2026-04-14T06:31:34.114Z [INFO]: Server is running on port 5000
+2026-04-14T06:32:08.165Z [INFO]: Redis connected successfully
+2026-04-14T06:32:08.678Z [INFO]: MongoDB connected successfully
+2026-04-14T06:32:08.685Z [INFO]: Server is running on port 5000
+2026-04-14T06:32:21.831Z [INFO]: Redis connected successfully
+2026-04-14T06:32:22.509Z [INFO]: MongoDB connected successfully
+2026-04-14T06:32:22.546Z [INFO]: Server is running on port 5000
+2026-04-14T06:36:55.135Z [INFO]: Redis connected successfully
+2026-04-14T06:36:55.829Z [INFO]: MongoDB connected successfully
+2026-04-14T06:36:55.841Z [INFO]: Server is running on port 5000
+2026-04-14T06:39:34.663Z [INFO]: Redis connected successfully
+2026-04-14T06:39:35.168Z [INFO]: MongoDB connected successfully
+2026-04-14T06:39:35.183Z [INFO]: Server is running on port 5000
+2026-04-14T06:40:19.351Z [INFO]: Redis connected successfully
+2026-04-14T06:40:19.825Z [INFO]: MongoDB connected successfully
+2026-04-14T06:40:19.848Z [INFO]: Server is running on port 5000
+2026-04-14T06:40:46.537Z [INFO]: Redis connected successfully
+2026-04-14T06:40:47.240Z [INFO]: MongoDB connected successfully
+2026-04-14T06:40:47.247Z [INFO]: Server is running on port 5000
+2026-04-14T06:43:30.403Z [INFO]: Redis connected successfully
+2026-04-14T06:43:30.980Z [INFO]: MongoDB connected successfully
+2026-04-14T06:43:31.008Z [INFO]: Server is running on port 5000
+2026-04-14T06:49:45.804Z [INFO]: Redis connected successfully
+2026-04-14T06:49:46.564Z [INFO]: MongoDB connected successfully
+2026-04-14T06:49:46.612Z [INFO]: Server is running on port 5000
+2026-04-14T06:50:18.367Z [INFO]: Redis connected successfully
+2026-04-14T06:50:18.814Z [INFO]: MongoDB connected successfully
+2026-04-14T06:50:18.820Z [INFO]: Server is running on port 5000
+2026-04-14T06:51:14.185Z [INFO]: Redis connected successfully
+2026-04-14T06:51:15.212Z [INFO]: MongoDB connected successfully
+2026-04-14T06:51:15.220Z [INFO]: Server is running on port 5000
+2026-04-14T06:51:24.144Z [INFO]: Redis connected successfully
+2026-04-14T06:51:24.745Z [INFO]: MongoDB connected successfully
+2026-04-14T06:51:24.751Z [INFO]: Server is running on port 5000
+2026-04-14T06:56:24.002Z [INFO]: Redis connected successfully
+2026-04-14T06:56:24.748Z [INFO]: MongoDB connected successfully
+2026-04-14T06:56:24.762Z [INFO]: Server is running on port 5000
+2026-04-14T07:20:59.285Z [INFO]: Redis connected successfully
+2026-04-14T07:20:59.701Z [INFO]: MongoDB connected successfully
+2026-04-14T07:20:59.715Z [INFO]: Server is running on port 5000
+2026-04-14T07:21:18.453Z [INFO]: Redis connected successfully
+2026-04-14T07:21:20.303Z [INFO]: MongoDB connected successfully
+2026-04-14T07:21:20.310Z [INFO]: Server is running on port 5000
+2026-04-14T07:21:49.877Z [INFO]: Redis connected successfully
+2026-04-14T07:21:50.551Z [INFO]: MongoDB connected successfully
+2026-04-14T07:21:50.561Z [INFO]: Server is running on port 5000
+2026-04-18T14:49:04.095Z [ERROR]: Redis Client Error
+2026-04-18T14:49:04.700Z [ERROR]: Redis Client Error
+2026-04-18T14:49:04.910Z [ERROR]: Redis Client Error
+2026-04-18T14:49:05.142Z [ERROR]: Redis Client Error
+2026-04-18T14:49:05.564Z [ERROR]: Redis Client Error
+2026-04-18T14:49:05.826Z [INFO]: MongoDB connected successfully
+2026-04-18T14:49:05.836Z [INFO]: Server is running on port 5000
+2026-04-18T14:49:06.570Z [ERROR]: Redis Client Error
+2026-04-18T14:49:08.351Z [ERROR]: Redis Client Error
+2026-04-18T14:49:10.481Z [ERROR]: Redis Client Error
+2026-04-18T14:49:12.615Z [ERROR]: Redis Client Error
+2026-04-18T14:49:14.691Z [ERROR]: Redis Client Error
+2026-04-18T14:49:16.894Z [ERROR]: Redis Client Error
+2026-04-18T14:49:19.104Z [ERROR]: Redis Client Error
+2026-04-18T14:49:21.245Z [ERROR]: Redis Client Error
+2026-04-18T14:49:23.309Z [ERROR]: Redis Client Error
+2026-04-18T14:49:25.518Z [ERROR]: Redis Client Error
+2026-04-18T14:49:27.598Z [ERROR]: Redis Client Error
+2026-04-18T14:49:29.787Z [ERROR]: Redis Client Error
+2026-04-18T14:49:31.831Z [ERROR]: Redis Client Error
+2026-04-18T14:49:34.004Z [ERROR]: Redis Client Error
+2026-04-18T14:49:36.053Z [ERROR]: Redis Client Error
+2026-04-18T14:49:38.122Z [INFO]: Redis connected successfully
+2026-04-18T14:51:39.768Z [INFO]: Redis connected successfully
+2026-04-18T14:51:43.589Z [INFO]: MongoDB connected successfully
+2026-04-18T14:51:43.630Z [INFO]: Server is running on port 5000
+2026-04-18T14:54:32.393Z [INFO]: Redis connected successfully
+2026-04-18T14:54:33.391Z [INFO]: MongoDB connected successfully
+2026-04-18T14:54:33.406Z [INFO]: Server is running on port 5000
+2026-04-18T14:55:01.434Z [INFO]: Redis connected successfully
+2026-04-18T14:55:04.494Z [INFO]: MongoDB connected successfully
+2026-04-18T14:55:04.503Z [INFO]: Server is running on port 5000
+2026-04-18T14:59:22.748Z [INFO]: Redis connected successfully
+2026-04-18T14:59:24.667Z [INFO]: MongoDB connected successfully
+2026-04-18T14:59:24.676Z [INFO]: Server is running on port 5000
+2026-04-18T15:02:14.962Z [INFO]: Redis connected successfully
+2026-04-18T15:02:16.338Z [INFO]: MongoDB connected successfully
+2026-04-18T15:02:16.353Z [INFO]: Server is running on port 5000
+2026-04-18T15:13:59.882Z [INFO]: Redis connected successfully
+2026-04-18T15:14:05.238Z [INFO]: MongoDB connected successfully
+2026-04-18T15:14:05.261Z [INFO]: Server is running on port 5000
+2026-04-18T15:21:19.962Z [INFO]: Redis connected successfully
+2026-04-18T15:21:21.778Z [INFO]: MongoDB connected successfully
+2026-04-18T15:21:21.790Z [INFO]: Server is running on port 5000
+2026-04-18T15:27:27.865Z [INFO]: Redis connected successfully
+2026-04-18T15:27:32.049Z [INFO]: MongoDB connected successfully
+2026-04-18T15:27:32.061Z [INFO]: Server is running on port 5000
+2026-04-18T15:38:24.871Z [INFO]: Redis connected successfully
+2026-04-18T15:38:26.199Z [INFO]: MongoDB connected successfully
+2026-04-18T15:38:26.209Z [INFO]: Server is running on port 5000
+2026-04-18T15:38:40.118Z [INFO]: Redis connected successfully
+2026-04-18T15:38:46.843Z [INFO]: Redis connected successfully
+2026-04-18T15:38:47.693Z [INFO]: MongoDB connected successfully
+2026-04-18T15:38:47.700Z [INFO]: Server is running on port 5000
+2026-04-18T15:39:04.021Z [INFO]: Redis connected successfully
+2026-04-18T15:39:04.852Z [INFO]: MongoDB connected successfully
+2026-04-18T15:39:04.859Z [INFO]: Server is running on port 5000
+2026-04-18T15:39:45.297Z [INFO]: Redis connected successfully
+2026-04-18T15:40:13.606Z [INFO]: Redis connected successfully
+2026-04-18T15:40:14.598Z [INFO]: MongoDB connected successfully
+2026-04-18T15:40:14.605Z [INFO]: Server is running on port 5000
+2026-04-18T15:40:27.343Z [INFO]: Redis connected successfully
+2026-04-18T15:40:28.459Z [INFO]: MongoDB connected successfully
+2026-04-18T15:40:28.466Z [INFO]: Server is running on port 5000
+2026-04-18T15:41:19.662Z [INFO]: Redis connected successfully
+2026-04-18T15:41:21.122Z [INFO]: MongoDB connected successfully
+2026-04-18T15:41:21.129Z [INFO]: Server is running on port 5000
+2026-04-18T15:41:53.553Z [INFO]: Redis connected successfully
+2026-04-18T15:41:55.555Z [INFO]: MongoDB connected successfully
+2026-04-18T15:41:55.571Z [INFO]: Server is running on port 5000
+2026-04-18T15:42:37.601Z [INFO]: Redis connected successfully
+2026-04-18T15:42:38.940Z [INFO]: MongoDB connected successfully
+2026-04-18T15:42:38.949Z [INFO]: Server is running on port 5000
+2026-04-18T15:42:41.708Z [INFO]: Redis connected successfully
+2026-04-18T15:42:42.646Z [INFO]: MongoDB connected successfully
+2026-04-18T15:42:42.655Z [INFO]: Server is running on port 5000
+2026-04-18T15:46:54.373Z [INFO]: Redis connected successfully
+2026-04-18T15:46:55.297Z [INFO]: MongoDB connected successfully
+2026-04-18T15:46:55.309Z [INFO]: Server is running on port 5000
+2026-04-18T15:48:17.287Z [INFO]: Redis connected successfully
+2026-04-18T15:48:18.094Z [INFO]: MongoDB connected successfully
+2026-04-18T15:48:18.100Z [INFO]: Server is running on port 5000
+2026-04-18T15:48:26.449Z [INFO]: Redis connected successfully
+2026-04-18T15:48:27.731Z [INFO]: MongoDB connected successfully
+2026-04-18T15:48:27.745Z [INFO]: Server is running on port 5000
+2026-04-18T15:48:32.784Z [INFO]: MongoDB connected successfully
+2026-04-18T15:48:32.797Z [INFO]: Server is running on port 5000
+2026-04-18T15:48:33.800Z [INFO]: Redis connected successfully
+2026-04-18T15:48:43.647Z [INFO]: Redis connected successfully
+2026-04-18T15:48:44.434Z [INFO]: MongoDB connected successfully
+2026-04-18T15:48:44.440Z [INFO]: Server is running on port 5000
+2026-04-18T15:49:59.628Z [INFO]: Redis connected successfully
+2026-04-18T15:50:00.377Z [INFO]: MongoDB connected successfully
+2026-04-18T15:50:00.383Z [INFO]: Server is running on port 5000
+2026-04-18T15:50:46.029Z [INFO]: Redis connected successfully
+2026-04-18T15:50:46.749Z [INFO]: MongoDB connected successfully
+2026-04-18T15:50:46.758Z [INFO]: Server is running on port 5000
+2026-04-18T15:51:11.346Z [INFO]: Redis connected successfully
+2026-04-18T15:51:12.342Z [INFO]: MongoDB connected successfully
+2026-04-18T15:51:12.359Z [INFO]: Server is running on port 5000
+2026-04-18T16:02:13.691Z [INFO]: Redis connected successfully
+2026-04-18T16:02:14.398Z [INFO]: MongoDB connected successfully
+2026-04-18T16:02:14.418Z [INFO]: Server is running on port 5000
+2026-04-18T16:03:05.109Z [INFO]: Redis connected successfully
+2026-04-18T16:03:05.835Z [INFO]: MongoDB connected successfully
+2026-04-18T16:03:05.846Z [INFO]: Server is running on port 5000
+2026-04-18T16:06:17.417Z [INFO]: Redis connected successfully
+2026-04-18T16:06:18.822Z [INFO]: MongoDB connected successfully
+2026-04-18T16:06:18.835Z [INFO]: Server is running on port 5000
+2026-04-18T16:07:10.758Z [INFO]: Redis connected successfully
+2026-04-18T16:07:11.409Z [INFO]: MongoDB connected successfully
+2026-04-18T16:07:11.421Z [INFO]: Server is running on port 5000
+2026-04-18T16:07:44.542Z [INFO]: Redis connected successfully
+2026-04-18T16:07:45.253Z [INFO]: MongoDB connected successfully
+2026-04-18T16:07:45.261Z [INFO]: Server is running on port 5000

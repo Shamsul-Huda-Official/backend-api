@@ -1,17 +1,27 @@
 const jwt = require('jsonwebtoken');
-const jwt_secret = require('../config/env').JWT_SECRET;
+const { JWT_SECRET } = require('../config/env');
 
 const authMiddleware = (req, res, next) => {
     try {
-        const token = req.headers.authorization;
-        if (!token) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader.startsWith('Bearer ')) {
             return res.status(401).json({
                 success: false,
                 message: 'No token provided',
             })
         }
+        console.log("HEADERS:", req.headers.authorization)
 
-        const decoded = jwt.verify(token, jwt_secret);
+        const token =  authHeader.split(' ')[1];
+        console.log("TOKEN:", token)
+        if(!token) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid token format'
+            })
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded; // req.user contains { id, role, institutionId }
         next();
     }
