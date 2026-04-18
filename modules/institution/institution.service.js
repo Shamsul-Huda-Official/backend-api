@@ -1,26 +1,44 @@
 const institutionRepository = require('./institution.repository')
+const authRepository = require('../auth/auth.repository')
+
 const authService = require('../auth/auth.service')
 
 const createInstitution = async (data) => {
-    const { name, email, password } = data;
+    const { name, email, address, adminId, plan, adminName, adminEmail, adminPassword  } = data;
 
-    if(!name || !email || !password) {
-        throw new Error('Name, email and password are required.')
+    if( !name || !email || !address || !adminEmail || !plan ) {
+        throw new Error('All fields are required.')
     }
 
     const institution = await institutionRepository.createInstitution({
-        name,
-        email,
+        name, 
+        email, 
+        address,
+        plan,
     });
 
-    // create a admin user
-    await authService.createUser({
-        name: `${name} Admin`,
-        username: `email`,
-        password,
-        role: 'admin',
-        institutionId: institution._id,
-    })
+    if(adminId) {
+        const existingUser = await authRepository.findById(adminId);
+        if(!existingUser) {
+            throw new Error('Admin not found');
+        } 
+
+        existingUser.institutionId = institution._id;
+        existingUser.role = 'admin';
+
+        await existingUser.save();
+    } else if (adminEmail && adminPassword) {
+        await authService.createUser({
+            name: adminName || `${name} Admin`,
+            username: adminEmail,
+            password: adminPassword,
+            role: 'admin',
+            institutionId: institution._id,
+        })
+    } else {
+        throw new Error('Admin details are required to create an institution.')
+    }
+
     return institution;
 }
 
