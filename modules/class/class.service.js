@@ -7,7 +7,7 @@ const createClass = async (data) => {
         throw new Error('Name and Institution ID are required.');
     }
 
-    if (divisions || divisions.length === 0) {
+    if (!divisions || divisions.length === 0) {
         throw new Error('At least one division is required.');
     }
 

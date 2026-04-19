@@ -4,7 +4,7 @@ const createClass = async (data) => {
     return await Class.create(data);
 };
 
-const getAllClasses = async (query, skipMiddlewareFunction, limit) => {
+const getAllClasses = async (query, skipMiddlewareFunction, limit = 10, skip = 0) => {
     const [ classes, total ] = await Promise.all([
         Class.find(query)
             .skip(skip)
