@@ -1,13 +1,15 @@
-const mongoose = require('mongoose');
-const { MONGO_URI } = require('./env');
-const logger = require('../logger/logger')
+const { PrismaClient } = require("@prisma/client");
+const logger = require("../logger/logger");
+
+const prisma = new PrismaClient();
 
 const connectDB = async () => {
-    await mongoose.connect(MONGO_URI, {
-        dbName: 'shia_portal',
-    })
-    .then(() => logger.info('MongoDB connected successfully'))
-    .catch((err) => logger.error('MongoDB connection error:', err));
+    await prisma.$connect()
+        .then(() => logger.info('PostgreSQL connected successfully'))
+        .catch((err) => logger.error('PostgreSQL connection error: ' + err));
 }
 
-module.exports = connectDB;
+module.exports = {
+    connectDB,
+    prisma,
+}

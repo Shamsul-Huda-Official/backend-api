@@ -1,0 +1,280 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Plan {
+  BASIC
+  GROWTH
+  PRO
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+enum AttendanceType {
+  MORNING
+  AFTERNOON
+  PERIOD
+}
+
+
+model Institution {
+  id          String   @id @default(uuid())
+  name        String
+  address     String
+  email       String   @unique
+  plan        Plan     @default(BASIC)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  auths        Auth[]
+  classes      Class[]
+  divisions    Division[]
+  teachers     Teacher[]
+  subjects     Subject[]
+  donations    Donation[]
+  periods      Period[]
+  students     Student[]
+  attendances  Attendance[]
+
+  @@map("institutions")
+}
+
+model Auth {
+  id            String   @id @default(uuid())
+  name          String
+  username      String   @unique
+  phone         String?  @unique
+  email         String?  @unique
+  password      String
+  role          Role     @default(USER)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  institutionId         String?
+  institution           Institution?  @relation(fields: [institutionId], references: [id])
+
+  teacher               Teacher?
+  student               Student?
+  markedAttendances     Attendance[]
+
+  @@map("auths")
+}
+
+model Class {
+  id            String   @id @default(uuid())
+  name          String
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  divisions     Division[]
+  subjects      Subject[]
+  periods       Period[]
+  students      Student[]
+  attendances   Attendance[]
+
+  @@unique([name, institutionId])
+  @@map("classes")
+}
+
+model Division {
+  id             String   @id @default(uuid())
+  name           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  classId        String
+  class          Class    @relation(fields: [classId], references: [id])
+
+  institutionId  String
+  institution    Institution @relation(fields: [institutionId], references: [id])
+
+  classTeacherId String?
+  classTeacher   Teacher? @relation("DivisionClassTeacher", fields: [classTeacherId], references: [id])
+
+  students       Student[]
+  subjects       Subject[]
+  periods        Period[]
+  attendances    Attendance[]
+
+  @@unique([name, classId])
+  @@map("divisions")
+}
+
+model Teacher {
+  id                   String   @id @default(uuid())
+  name                 String
+  phone                String
+  email                String   @unique
+  profileImageUrl      String?
+  profileImagePublicId String?
+  isActive             Boolean  @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  userId        String?  @unique
+  user          Auth?    @relation(fields: [userId], references: [id])
+
+  classDivisions Division[] @relation("DivisionClassTeacher")
+  periods        Period[]
+
+  @@map("teachers")
+}
+
+// STEP 6 — admin creates subjects under class+division
+model Subject {
+  id            String   @id @default(uuid())
+  name          String
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  classId       String
+  class         Class    @relation(fields: [classId], references: [id])
+
+  divisionId    String
+  division      Division @relation(fields: [divisionId], references: [id])
+
+  periods       Period[]
+
+  @@unique([name, classId, divisionId])
+  @@map("subjects")
+}
+
+model Period {
+  id            String   @id @default(uuid())
+  name          String               
+  dayOfWeek     Int                  
+  length        Int                  
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  classId       String
+  class         Class    @relation(fields: [classId], references: [id])
+
+  divisionId    String
+  division      Division @relation(fields: [divisionId], references: [id])
+
+  subjectId     String?              
+  subject       Subject? @relation(fields: [subjectId], references: [id])
+
+  teacherId     String?              
+  teacher       Teacher? @relation(fields: [teacherId], references: [id])
+
+  attendances   Attendance[]
+
+  @@map("periods")
+}
+
+model Student {
+  id              String   @id @default(uuid())
+  name            String
+  admissionNumber String   @unique
+  rollNumber      String
+  phone           String
+  parentName      String
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  institutionId   String
+  institution     Institution @relation(fields: [institutionId], references: [id])
+
+  classId         String
+  class           Class    @relation(fields: [classId], references: [id])
+
+  divisionId      String
+  division        Division @relation(fields: [divisionId], references: [id])
+
+  userId          String?  @unique
+  user            Auth?    @relation(fields: [userId], references: [id])
+
+  attendances     Attendance[]
+  donations       Donation[]
+
+  @@map("students")
+}
+
+model Attendance {
+  id            String           @id @default(uuid())
+  date          DateTime         @db.Date
+  status        AttendanceStatus @default(PRESENT)
+  type          AttendanceType   
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  institutionId String
+  institution   Institution      @relation(fields: [institutionId], references: [id])
+
+  studentId     String
+  student       Student          @relation(fields: [studentId], references: [id])
+
+  classId       String
+  class         Class            @relation(fields: [classId], references: [id])
+
+  divisionId    String
+  division      Division         @relation(fields: [divisionId], references: [id])
+
+  periodId      String?          
+  period        Period?          @relation(fields: [periodId], references: [id])
+
+  markedById    String
+  markedBy      Auth             @relation(fields: [markedById], references: [id])
+
+  @@unique([studentId, date, type, periodId])
+  @@map("attendances")
+}
+
+model Donation {
+  id            String   @id @default(uuid())
+  amount        Float
+  date          DateTime @db.Date
+  month         String
+  year          Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  studentId     String
+  student       Student  @relation(fields: [studentId], references: [id])
+
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  @@map("donations")
+}
