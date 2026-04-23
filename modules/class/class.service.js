@@ -20,12 +20,12 @@ const createClass = async (data) => {
 }
 
 const getAllClasses = async ({ skip, limit, institutionId }) => {
-   const query = {};
+   const where = {};
 
    if(institutionId) {
-    query.institutionId = institutionId;
+    where.institutionId = institutionId;
    }
-   return await classRepository.getAllClasses(query, skip, limit);
+   return await classRepository.getAllClasses(where, skip, limit);
 }
 
 const getClassById = async (id) => {
