@@ -1,39 +1,17 @@
 const authService = require('./auth.service');
+const asyncHandler = require('../../shared/utils/asyncHandler');
+const { successResponse } = require('../../shared/utils/resonseFormatter')
 
-const createUser = async (req, res) => {
-    try {
-        const user = await authService.createUser(req.body);
+const createUser = asyncHandler(async(req, res) => {
+    const user = await authService.createUser(req.body);
+    successResponse(res, 201, user);
+})
 
-        res.status(201).json({
-            success: true,
-            data: user,
-        })
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false, 
-            message: error.message,
-        })
-    }
-}
-
-const loginUser = async (req, res) => {
-    try {
-        const { username, password } = req.body;
-
-        const result = await authService.loginUser(username, password);
-        res.status(200).json({ 
-            success: true,
-            data: result,
-        })
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false, 
-            message: error.message,
-        })
-    }
-}
+const loginUser = asyncHandler(async(req, res) => {
+    const { username, password } = req.body;
+    const result = await authService.loginUser(username, password);
+    successResponse(res, 200, result);
+})
 
 module.exports = {
     createUser,

@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authRepository = require('./auth.repository');
 const {JWT_SECRET} = require('../../shared/config/env');
+const AppError = require('../../shared/errors/AppError')
 // const JWT_SECRET = process.env.JWT_SECRET 
 
-const createUser = async (userData, session = null) => {
+const createUser = async (userData) => {
     const existing = await authRepository.findByUsername(userData.username);
     if(existing) {
-        throw new Error('Username already exists');
+        throw new AppError('Username already exists', 400);
     }
 
     const { password } = userData;
@@ -22,7 +22,7 @@ const createUser = async (userData, session = null) => {
     const user = await authRepository.createUser({
         ...cleanData,
         password: hashedPassword,
-    }, session);
+    });
     return user;
 }
 
@@ -30,18 +30,18 @@ const loginUser = async (username, password) => {
     const user = await authRepository.findByUsername(username);
 
     if (!user) {
-        throw new Error('User not found');
+        throw new AppError('User not found', 404);
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-        throw new Error('Invalid credentials');
+        throw new AppError('Invalid credentials', 401);
     }
 
     const token = jwt.sign(
         {
-            id: user._id, 
+            id: user.id, 
             role: user.role,
             institutionId: user.institutionId,
         },
@@ -51,7 +51,7 @@ const loginUser = async (username, password) => {
     return {
         token, 
         user: {
-            id: user._id,
+            id: user.id,
             name: user.name,
             role: user.role,   
         },
