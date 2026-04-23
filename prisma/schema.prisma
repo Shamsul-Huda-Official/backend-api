@@ -206,8 +206,8 @@ model Student {
   id              String   @id @default(uuid())
   name            String
   admissionNumber String   @unique
-  rollNumber      String
-  phone           String
+  rollNumber      String   @unique
+  phone           String   @unique
   parentName      String
   isActive        Boolean  @default(true)
   createdAt       DateTime @default(now())
