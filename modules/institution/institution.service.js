@@ -60,7 +60,14 @@ const getInstitutionById = async (id) => {
 }
 
 const updateInstitutionById = async (id, data) => {
-    return await institutionRepository.updateInstitution(id, data);
+    const { name, email, address, plan, isActive } = data;
+    return await institutionRepository.updateInstitution(id, {
+        name,
+        email,
+        address,
+        plan,
+        isActive
+    });
 }
 
 const deleteInstitution = async (id) => {

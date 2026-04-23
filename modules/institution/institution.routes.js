@@ -16,8 +16,8 @@ router.route('/')
 
 router.route('/:id')
     .get(getInstitutionById)
-    .put(authMiddleware, roleMiddleware('super_admin'), updateInstitutionById)
-    .delete(authMiddleware, roleMiddleware('super_admin'), deleteInstitution)
+    .put(updateInstitutionById)
+    .delete(deleteInstitution)
 
 module.exports = router;
 
