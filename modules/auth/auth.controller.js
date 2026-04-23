@@ -4,13 +4,13 @@ const { successResponse } = require('../../shared/utils/resonseFormatter')
 
 const createUser = asyncHandler(async(req, res) => {
     const user = await authService.createUser(req.body);
-    successResponse(res, 201, user);
+    successResponse(res, user, 'User created successfully');
 })
 
 const loginUser = asyncHandler(async(req, res) => {
     const { username, password } = req.body;
     const result = await authService.loginUser(username, password);
-    successResponse(res, 200, result);
+    successResponse(res, result, 'User logged in successfully');
 })
 
 module.exports = {

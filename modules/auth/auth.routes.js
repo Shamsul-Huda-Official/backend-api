@@ -5,9 +5,8 @@ const {
     loginUser,
 } = require('./auth.controller');
 
-router.post('/register', authController.createUser);
-router.post('/login', authController.loginUser);
+router.post('/register', createUser);
+router.post('/login', loginUser);
 
-// router.get('/:id', authController.findById);
 
 module.exports = router;
