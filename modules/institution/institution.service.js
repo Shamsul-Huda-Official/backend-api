@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 
 const institutionRepository = require('./institution.repository')
 const authRepository = require('../auth/auth.repository')
