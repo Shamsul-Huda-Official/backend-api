@@ -8,8 +8,8 @@ const findById = async (id) => {
     return await prisma.auth.findUnique({ where: { id } });
 }
 
-const createUser = async (userData) => {
-    return await prisma.auth.create({ data: userData });
+const createUser = async (userData, tx = prisma) => {
+    return await tx.auth.create({ data: userData });
 }
 
 module.exports = {
