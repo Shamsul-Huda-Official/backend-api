@@ -1,35 +1,35 @@
+const { prisma } = require('../../shared/config/connection');
+const institutionRepository = require('./institution.repository');
+const authRepository = require('../auth/auth.repository');
 
-const institutionRepository = require('./institution.repository')
-const authRepository = require('../auth/auth.repository')
-
-const authService = require('../auth/auth.service')
+const authService = require('../auth/auth.service');
+const AppError = require('../../shared/errors/AppError');
 
 const createInstitution = async (data) => {
-    const session = await mongoose.startSession();
-    session.startTransaction();
     const { name, email, address, adminId, plan, adminName, adminEmail, adminPassword, adminPhone  } = data;
 
     if( !name || !email || !address || !adminEmail || !plan ) {
-        throw new Error('All fields are required.')
+        throw new AppError('All fields are required.', 400);
     }
 
-    const institution = await institutionRepository.createInstitution({
-        name, 
-        email, 
-        address,
-        plan
-    }, session);
+    return await prisma.$transaction(async (tx) => {
+        const institution = await institutionRepository.createInstitution(
+            { name, email, address, plan },
+            tx
+        );
+    });
 
     if(adminId) {
         const existingUser = await authRepository.findById(adminId);
         if(!existingUser) {
-            throw new Error('Admin not found');
-        } 
+            throw new AppError('Admin not found', 404);
+        }
 
-        existingUser.institutionId = institution._id;
-        existingUser.role = 'admin';
+        await tx.auth.update({
+            where: { id: adminId },
+            data: { institutionId: institution.id, role: 'ADMIN' },
+        })
 
-        await existingUser.save();
     } else if (adminEmail && adminPassword) {
         await authService.createUser({
             name: adminName || `${name} Admin`,
@@ -37,16 +37,12 @@ const createInstitution = async (data) => {
             phone: adminPhone,
             email: adminEmail,
             password: adminPassword,
-            role: 'admin',
-            institutionId: institution._id,
-        }, session);
+            role: 'ADMIN',
+            institutionId: institution.id,
+        }, tx);
     } else {
-        throw new Error('Admin details are required to create an institution.')
+        throw new AppError('Admin details are required to create an institution.', 400);
     }
-
-    await session.commitTransaction();
-    session.endSession();
-
     return institution;
 }
 
@@ -56,7 +52,6 @@ const getAllInstitution = async (skip, limit, name, search, query) => {
         limit,
         name, 
         search, 
-        query,
     })
 }
 
