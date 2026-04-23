@@ -519,3 +519,6 @@
 2026-04-19T16:08:33.525Z [INFO]: Redis connected successfully
 2026-04-19T16:08:34.495Z [INFO]: MongoDB connected successfully
 2026-04-19T16:08:34.508Z [INFO]: Server is running on port 5000
+2026-04-23T05:26:46.522Z [INFO]: PostgreSQL connected successfully
+2026-04-23T05:26:46.534Z [INFO]: Server is running on port 5000
+2026-04-23T05:26:46.697Z [INFO]: Redis connected successfully

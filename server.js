@@ -1,6 +1,6 @@
 const app = require('./app');
 const { PORT } = require('./shared/config/env');
-const connectDB = require('./shared/config/connection')
+const { connectDB } = require('./shared/config/connection')
 const logger = require('./shared/logger/logger');
 
 connectDB()

@@ -1,4 +1,3 @@
-const Class = require('./class.model');
 
 const createClass = async (data) => {
     return await Class.create(data);

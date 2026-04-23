@@ -1,4 +1,3 @@
-const Institution = require('./institution.model')
 const { prisma } = require('../../shared/config/connection');
 
 const createInstitution = async (data, tx = prisma) => {
