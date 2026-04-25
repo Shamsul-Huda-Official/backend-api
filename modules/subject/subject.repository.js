@@ -34,11 +34,16 @@ const updateSubject = async (id, institutionId, data) => {
     return await prisma.subject.update({ where: {
         id,
         institutionId
-    }, data })
+    }, 
+    data 
+ })
 }
 
-const deleteSubject = async (id) => {
-    await prisma.subject.delete({ where: { id }})
+const deleteSubject = async (id, institutionId) => {
+    await prisma.subject.delete({ where: {
+        id, 
+        institutionId
+    }})
 }
 
 module.exports = {
