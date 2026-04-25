@@ -49,7 +49,29 @@ const getClassById = async (id) => {
 }
 
 const updateClass = async (id, data) => {
-    return await classRepository.updateClass(id, data);
+    const { name, institutionId, division } = data;
+
+    return await prisma.$transaction(async (tx) => {
+        const updateClass = await classRepository.updateClass(id, { name: institutionId }, tx);
+        if( division && division.length > 0 ) {
+            const names = division.map(d => d.name);
+            if(new Set(names).size !== names.length) {
+                throw new AppError('Duplicate division names are not allowed.', 400);
+            }
+
+            await tx.division.deleteMany({ where: { classId: id }});
+
+            await tx.division.createMany({
+                data: division.map(d => ({
+                    name: d.name,
+                    classId: id,
+                    institutionId: updateClass.institutionId,
+                    classTeacherId: d.classTeacherId || null
+                }))
+            });
+        }
+        return updateClass;
+    })
 }
 
 const deleteClass = async (id) => {

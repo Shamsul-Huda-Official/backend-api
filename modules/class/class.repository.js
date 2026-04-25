@@ -15,10 +15,10 @@ const getAllClasses = async ({ where, skipMiddlewareFunction, limit = 10, skip =
                 divisions: {
                     include: {
                         classTeacher: {
-                            select: { select: {
+                            select:  {
                                 name: true,
                                 userId: true
-                            }}
+                            }
                         }
                     }
                 }
@@ -44,8 +44,8 @@ const getClassById = async (id) => {
     }});
 };
 
-const updateClass = async (id, data) => {
-    return await prisma.class.update({ where: { id }, data });
+const updateClass = async (id, data, tx = prisma) => {
+    return await tx.class.update({ where: { id }, data });
 };
 
 const deleteClass = async (id) => {
