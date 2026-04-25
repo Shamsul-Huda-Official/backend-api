@@ -162,10 +162,10 @@ model Subject {
   institution   Institution @relation(fields: [institutionId], references: [id])
 
   classId       String
-  class         Class    @relation(fields: [classId], references: [id])
+  class         Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
 
   divisionId    String
-  division      Division @relation(fields: [divisionId], references: [id])
+  division      Division @relation(fields: [divisionId], references: [id], onDelete: Cascade)
 
   periods       Period[]
 
@@ -186,10 +186,10 @@ model Period {
   institution   Institution @relation(fields: [institutionId], references: [id])
 
   classId       String
-  class         Class    @relation(fields: [classId], references: [id])
+  class         Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
 
   divisionId    String
-  division      Division @relation(fields: [divisionId], references: [id])
+  division      Division @relation(fields: [divisionId], references: [id], onDelete: Cascade)
 
   subjectId     String?              
   subject       Subject? @relation(fields: [subjectId], references: [id])
@@ -220,7 +220,7 @@ model Student {
   class           Class    @relation(fields: [classId], references: [id])
 
   divisionId      String
-  division        Division @relation(fields: [divisionId], references: [id])
+  division        Division @relation(fields: [divisionId], references: [id], onDelete: Cascade)
 
   userId          String?  @unique
   user            Auth?    @relation(fields: [userId], references: [id])
@@ -243,7 +243,7 @@ model Attendance {
   institution   Institution      @relation(fields: [institutionId], references: [id])
 
   studentId     String
-  student       Student          @relation(fields: [studentId], references: [id])
+  student       Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   classId       String
   class         Class            @relation(fields: [classId], references: [id])
