@@ -4,7 +4,14 @@ const createSubject = async (data, tx = prisma) => {
     return await tx.subject.create({ data })
 }
 
-const createAllSubjects = async ({ institutionId, classId, divisionId }) => {
+const bulkCreateSubject = async (docs, tx = prisma) => {
+    return await tx.subject.createMany({
+        data: docs,
+        skipDuplicates: true,
+    })
+}
+
+const getAllSubjects = async ({ institutionId, classId, divisionId }) => {
     return await prisma.subject.findMany({
         where: {
             institutionId: institutionId,
@@ -14,4 +21,31 @@ const createAllSubjects = async ({ institutionId, classId, divisionId }) => {
         },
         orderBy: { name: 'asc'}
     })
+}
+
+const getSubjectById = async (id) => {
+    return await prisma.subject.findUnique({ where: {
+        id,
+        institutionId
+    } })
+}
+
+const updateSubject = async (id, institutionId, data) => {
+    return await prisma.subject.update({ where: {
+        id,
+        institutionId
+    }, data })
+}
+
+const deleteSubject = async (id) => {
+    await prisma.subject.delete({ where: { id }})
+}
+
+module.exports = {
+    createSubject,
+    bulkCreateSubject,
+    getAllSubjects,
+    getSubjectById,
+    updateSubject,
+    deleteSubject
 }
