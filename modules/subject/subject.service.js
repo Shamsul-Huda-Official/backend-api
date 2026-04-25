@@ -58,3 +58,12 @@ const deleteSubject = async (id, institutionId) => {
     if(!subject) throw new AppError('Subject not found', 404);
     return subject;
 }
+
+module.exports = {
+    createSubject,
+    bulkCreateSubjects,
+    getAllSubjects,
+    getSubjectById,
+    updateSubject,
+    deleteSubject
+}

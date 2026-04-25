@@ -1,7 +1,7 @@
 const classService = require('./class.service');
 const asyncHandler = require('../../shared/utils/asyncHandler');
 const { invalidateCache } = require('../../shared/utils/cache');
-const { successResponse } = require('../../shared/utils/resonseFormatter');
+const { successResponse } = require('../../shared/utils/responseFormatter');
 
 exports.createClass = asyncHandler(async (req, res) => {
     const data = await classService.createClass(req.body);

@@ -1,7 +1,7 @@
 const institutionService = require('./institution.service')
 const asyncHandler = require('../../shared/utils/asyncHandler');
 const { invalidateCache } = require('../../shared/utils/cache');
-const { successResponse } = require('../../shared/utils/resonseFormatter');
+const { successResponse } = require('../../shared/utils/responseFormatter');
 
 exports.createInstitution = asyncHandler(async (req, res) => {
     const institution = await institutionService.createInstitution(req.body);

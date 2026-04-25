@@ -1,6 +1,6 @@
 const authService = require('./auth.service');
 const asyncHandler = require('../../shared/utils/asyncHandler');
-const { successResponse } = require('../../shared/utils/resonseFormatter')
+const { successResponse } = require('../../shared/utils/responseFormatter')
 
 const createUser = asyncHandler(async(req, res) => {
     const user = await authService.createUser(req.body);
