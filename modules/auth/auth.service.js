@@ -46,7 +46,7 @@ const loginUser = async (username, password) => {
             institutionId: user.institutionId,
         },
         JWT_SECRET, 
-        { expiresIn: '1d'}
+        { expiresIn: '30d'}
     )
     return {
         token, 

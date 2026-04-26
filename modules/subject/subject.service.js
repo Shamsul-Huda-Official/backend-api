@@ -54,9 +54,7 @@ const updateSubject = async (id, institutionId, data) => {
 }
 
 const deleteSubject = async (id, institutionId) => {
-    const subject = await subjectRepository.deleteSubject(id, institutionId);
-    if(!subject) throw new AppError('Subject not found', 404);
-    return subject;
+    return await subjectRepository.deleteSubject(id, institutionId);
 }
 
 module.exports = {

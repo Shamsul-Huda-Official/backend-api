@@ -25,6 +25,7 @@ exports.bulkCreateSubject = asyncHandler(async (req, res) => {
 })
 
 exports.getAllSubjects = asyncHandler(async (req, res) => {
+    console.log('USER: ', req.user)
     const institutionId = req.user.institutionId
     const { classId, divisionId } = req.query
 
