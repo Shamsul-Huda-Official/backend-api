@@ -10,15 +10,17 @@ const {
 const authMiddleware = require('../../shared/middleware/auth.middleware')
 const roleMiddleware = require('../../shared/middleware/role.middleware')
 
+// router.use(authMiddleware)
+
 router.route('/')
-    .get(roleMiddleware('super_admin'), getInstitutions)
-    .post(roleMiddleware('super_admin'), createInstitution)
+    .get(getInstitutions)
+    .post(createInstitution)
 
 router.route('/:id')
     .get(getInstitutionById)
-    .put(authMiddleware, roleMiddleware('super_admin'), updateInstitutionById)
-    .delete(authMiddleware, roleMiddleware('super_admin'), deleteInstitution)
+    .put( updateInstitutionById)
+    .delete(deleteInstitution)
 
 module.exports = router;
-
+// roleMiddleware('SUPER_ADMIN'),
  

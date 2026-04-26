@@ -17,9 +17,8 @@ const createInstitution = async (data) => {
             { name, email, address, plan },
             tx
         );
-    });
-
-    if(adminId) {
+        
+        if(adminId) {
         const existingUser = await authRepository.findById(adminId);
         if(!existingUser) {
             throw new AppError('Admin not found', 404);
@@ -44,6 +43,7 @@ const createInstitution = async (data) => {
         throw new AppError('Admin details are required to create an institution.', 400);
     }
     return institution;
+    });
 }
 
 const getAllInstitution = async (skip, limit, name, search, query) => {
