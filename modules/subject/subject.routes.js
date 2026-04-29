@@ -18,6 +18,8 @@ router.route('/')
     .get(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), getAllSubjects)
     .post(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), createSubject)
 
+router.post('/bulk', roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), bulkCreateSubject)
+
 router.route('/:id')
     .get(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), getSubjectById)
     .put(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), updateSubject)
