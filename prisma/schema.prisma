@@ -21,6 +21,7 @@ enum Plan {
 enum Role {
   SUPER_ADMIN
   ADMIN
+  TEACHER
   USER
 }
 
