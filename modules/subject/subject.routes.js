@@ -15,12 +15,12 @@ const roleMiddleware = require('../../shared/middleware/role.middleware')
 router.use(authMiddleware);
 
 router.route('/')
-    .get(roleMiddleware('SUPER_ADMIN', 'ADMIN'), getAllSubjects)
-    .post(roleMiddleware('SUPER_ADMIN', 'ADMIN'), createSubject)
+    .get(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), getAllSubjects)
+    .post(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), createSubject)
 
 router.route('/:id')
-    .get(roleMiddleware('SUPER_ADMIN', 'ADMIN'), getSubjectById)
-    .put(roleMiddleware('SUPER_ADMIN', 'ADMIN'), updateSubject)
-    .delete(roleMiddleware('SUPER_ADMIN', 'ADMIN'), deleteSubject)
+    .get(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), getSubjectById)
+    .put(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), updateSubject)
+    .delete(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), deleteSubject)
 
 module.exports = router;
