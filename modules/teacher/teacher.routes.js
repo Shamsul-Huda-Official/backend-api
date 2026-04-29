@@ -19,6 +19,8 @@ router.route('/')
     .get(roleMiddleware('SUPER_ADMIN', 'ADMIN'), getAllTeachers)
     .post(roleMiddleware('SUPER_ADMIN', 'ADMIN'), createTeacher)
 
+router.post('/bulk', roleMiddleware('SUPER_ADMIN', 'ADMIN'), bulkCreateTeacher)
+
 router.route('/:id')
     .get(roleMiddleware('SUPER_ADMIN', 'ADMIN'), getTeacherById)
     .put(roleMiddleware('SUPER_ADMIN', 'ADMIN'), updateTeacher)
