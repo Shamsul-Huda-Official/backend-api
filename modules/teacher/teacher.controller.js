@@ -22,6 +22,36 @@ exports.bulkCreateTeacher = asyncHandler(async (req, res) => {
         institutionId
     })
     return successResponse(res, result, 'Bulk create completed.')
+});
+
+exports.getAllTeachers = asyncHandler(async (req, res) => {
+    const institutionId = req.user.institutionId;
+
+    const teachers = await teacherService.getAllTeachers({
+        institutionId
+    });
+    return successResponse(res, teachers, 'Teachers fetched successfully.');
+});
+
+exports.getTeacherById = asyncHandler(async (req, res) => {
+    const institutionId = req.user.institutionId;
+
+    const teacher = await teacherService.getTeacherById( req.params.id, institutionId );
+    return successResponse(res, teacher, 'Teacher by Id fetched successfully.');
+});
+
+exports.updateTeacher = asyncHandler(async (req, res) => {
+    const institutionId = req.user.institutionId;
+
+    const teacher = await teacherService.getTeacherById( req.params.id, institutionId, req.body );
+    await invalidateCache('teacher:*')
+    return successResponse(res, teacher, 'Teacher updated successfully.');
+});
+
+exports.deleteTeacher = asyncHandler(async (req, res) => {
+    const institutionId = req.user.institutionId;
+
+    const teacher = await teacherService.deleteTeacher(req.params.id, institutionId);
+    await invalidateCache('teacher:*');
+    return successResponse(res, null, 'Teacher deleted successfully.');
 })
-
-
