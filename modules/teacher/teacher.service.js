@@ -65,3 +65,36 @@ const bulkCreateTeacher = async ({ teachers, institutionId}) => {
         return results;
     });
 };
+
+const getAllTeachers = async ({ institutionId }) => {
+    if(!institutionId) throw new AppError('InstitutionId not found.', 404);
+
+    return await teacherRepository.getAllTeachers({
+        institutionId
+    })
+};
+
+const getTeacherById = async (id, institutionId) => {
+    const teacher = await teacherRepository.getTeacherById(id, institutionId);
+    if(!teacher) throw new AppError('Teacher not found.', 404);
+    return teacher;
+};
+
+const updateTeacher = async (id, institutionId, data) => {
+    const teacher = await teacherRepository.updateTeacher(id, institutionId, data);
+    if(!teacher) throw new AppError('Teacher not found.', 404);
+    return teacher;
+}
+
+const deleteTeacher = async (id, institutionId) => {
+    return await teacherRepository.deleteTeacher(id, institutionId);
+}
+
+module.exports = {
+    createTeacher,
+    bulkCreateTeacher,
+    getAllTeachers,
+    getTeacherById,
+    updateTeacher,
+    deleteTeacher,
+}
