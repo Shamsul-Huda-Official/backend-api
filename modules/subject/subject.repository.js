@@ -23,7 +23,7 @@ const getAllSubjects = async ({ institutionId, classId, divisionId }) => {
     })
 }
 
-const getSubjectById = async (id) => {
+const getSubjectById = async (id, institutionId) => {
     return await prisma.subject.findUnique({ where: {
         id,
         institutionId
