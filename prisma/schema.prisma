@@ -205,11 +205,14 @@ model Period {
 
 model Student {
   id              String   @id @default(uuid())
+  username        String   @unique
   name            String
   admissionNumber String   @unique
   rollNumber      String   @unique
   phone           String   @unique
+  email           String   @unique
   parentName      String
+  password        String
   isActive        Boolean  @default(true)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt

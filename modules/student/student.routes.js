@@ -12,6 +12,8 @@ const {
 const authMiddleware = require('../../shared/middleware/auth.middleware');
 const roleMiddleware = require('../../shared/middleware/role.middleware');
 
+router.use(authMiddleware)
+
 router.route('/')
     .get(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), getAllStudents)
     .post(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), createStudent)
