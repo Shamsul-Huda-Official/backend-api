@@ -12,7 +12,9 @@ const bulkCreateStudent = async (docs) => {
 
 const getAllStudents = async ({ institutionId }) => {
     return await prisma.student.findMany({
-        institutionId,
+        where: {
+            institutionId,
+        }
     });
 };
 
@@ -20,7 +22,7 @@ const getStudentById = async (id, institutionId) => {
     return await prisma.student.findUnique({
         where: {
             id, 
-            institution
+            institutionId
         }
     });
 };
@@ -44,11 +46,11 @@ const deleteStudent = async (id, institutionId) => {
     });
 };
 
-module.exports = [
+module.exports = {
     createStudent, 
     bulkCreateStudent,
     getAllStudents,
     getStudentById,
     updateStudent,
     deleteStudent
-]
+}
