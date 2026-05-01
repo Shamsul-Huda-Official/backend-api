@@ -12,7 +12,6 @@ const assignSubject = async (id, institutionId, data) => {
         },
         data: {
             subjectId: data.subjectId,
-            teacherId: data.teacherId || null
         }
     })
 }
