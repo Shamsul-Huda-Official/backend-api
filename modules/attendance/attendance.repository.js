@@ -3,7 +3,7 @@ const { prisma } =  require('../../shared/config/connection');
 const bulkCreateAttendance = async (docs) => {
     return prisma.attendance.createMany({
         data: docs,
-        skipDuplicate: true,
+        skipDuplicates: true,
     });
 };
 
