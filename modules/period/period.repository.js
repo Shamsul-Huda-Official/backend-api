@@ -1,14 +1,18 @@
 const { prisma } = require('../../shared/config/connection');
 
-const createPeriods = async (data) => {
-    return await prisma.period.create({ data });
+const createPeriods = async (periods) => {
+    return await prisma.period.createMany({ 
+        data: periods, 
+    },
+     
+);
 }
 
 const assignSubject = async (id, institutionId, data) => {
     return await prisma.period.update({
         where: {
             id, 
-            institution,
+            institutionId,
         },
         data: {
             subjectId: data.subjectId,
@@ -22,7 +26,8 @@ const getAllPeriods = async ({ institutionId, classId, divisionId }) => {
             institutionId,
             classId,
             divisionId,
-        }
+        },
+        orderBy: { name: 'asc' }
     });
 };
 

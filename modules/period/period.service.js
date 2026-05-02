@@ -2,22 +2,38 @@ const { prisma } = require('../../shared/config/connection');
 const AppError = require('../../shared/errors/AppError');
 
 const periodRepository = require('./period.repository');
-
+const dayMap = {
+    'Sunday': 0,
+    'Monday': 1,
+    'Tuesday': 2,
+    'Wednesday': 3,
+    'Thursday': 4,
+    'Friday': 5,
+    'Saturday': 6,
+}
 const createPeriods = async (data) => {
-    const { name, length, dayOfWeek, institutionId, classId, divisionId } = data;
-    if ( !name || !length || !dayOfWeek ) throw new AppError('All fields are required.', 400)
+    const { count, length, dayOfWeek, institutionId, classId, divisionId } = data;
+    if ( !count || !length || !dayOfWeek ) throw new AppError('All fields are required.', 400)
     if( !institutionId ) throw new AppError('institutionId is required!', 400)
     if( !classId ) throw new AppError('classId is required!', 400)
     if( !divisionId ) throw new AppError('divisionId is required', 400)
 
-    return await periodRepository.createPeriods({
-        name,
-        length,
-        dayOfWeek,
-        institutionId,
-        classId,
-        divisionId,
-    })
+    const dayNumber = dayMap[dayOfWeek];
+    if (dayNumber === undefined) throw new AppError('Invalid day. Use Monday to Sunday', 400)
+
+    const periods = [];
+    for (let i = 1; i <= count; i++) {
+        periods.push({
+            name: `${i}`,
+            length,
+            dayOfWeek: dayNumber,
+            institutionId,
+            classId,
+            divisionId,
+        });
+    }
+
+    return await periodRepository.createPeriods(periods);
 }
 
 const assignSubject = async (id, institutionId, data) => {

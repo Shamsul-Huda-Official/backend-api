@@ -17,9 +17,10 @@ router.route('/')
     .get(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), getAllPeriods)
     .post(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), createPeriod)
 
+router.put('/:id/assign', roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), assignSubject)
+
 router.route('/:id')
     .get(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), getPeriodById)
-    .put(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), assignSubject)
     .delete(roleMiddleware('SUPER_ADMIN', 'ADMIN', 'TEACHER'), deletePeriod)
 
 module.exports = router;

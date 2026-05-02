@@ -28,8 +28,9 @@ enum Role {
 enum AttendanceStatus {
   PRESENT
   ABSENT
-  LATE
+  MEDICAL
   EXCUSED
+  RECOVERED
 }
 
 enum AttendanceType {
@@ -240,6 +241,7 @@ model Attendance {
   date          DateTime         @db.Date
   status        AttendanceStatus @default(PRESENT)
   type          AttendanceType   
+  purpose       String
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
 

@@ -7,7 +7,7 @@ const periodService = require('./period.service');
 
 exports.createPeriod = asyncHandler(async (req, res) => {
     const institutionId = req.user.institutionId;
-    const period = await periodService.createPeriods( ...req.body, institutionId );
+    const period = await periodService.createPeriods({ ...req.body, institutionId });
     await invalidateCache('period:*');
     successResponse(res, period, 'Period created successfully.');
 })
