@@ -37,7 +37,7 @@ const createPeriods = async (data) => {
 }
 
 const assignSubject = async (id, institutionId, data) => {
-    const { subjectId } = data;
+    const { subjectId, teacherId } = data;
     if(!subjectId) throw new AppError('Subject id is required', 400)
 
     const period = periodRepository.assignSubject(id, institutionId, data);
