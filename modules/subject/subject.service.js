@@ -19,7 +19,7 @@ const createSubject = async (data) => {
     })
 }
 
-const bulkCreateSubjects = async(institutionId, classId, divisionId, names) => {
+const bulkCreateSubjects = async({ institutionId, classId, divisionId, names }) => {
     if(!institutionId) throw new AppError('institutionId is required', 400)
     if(!classId) throw new AppError('classId is required', 400)
     if(!divisionId) throw new AppError('divisionId is required', 400)

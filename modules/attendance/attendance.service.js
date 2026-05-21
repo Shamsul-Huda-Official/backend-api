@@ -23,7 +23,7 @@ const bulkCreateAttendance = async (data) => {
         institutionId,
         markedById
     }));
-    return await attendanceRepository.bulkCreateAttendance(docs)
+    return await attendanceRepository.bulkCreateAttendance({ docs })
 };
 
 const getAttendance = async ({ institutionId, classId, divisionId, date, type, periodId }) => {

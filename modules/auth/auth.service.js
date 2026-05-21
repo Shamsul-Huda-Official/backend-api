@@ -5,7 +5,7 @@ const {JWT_SECRET} = require('../../shared/config/env');
 const AppError = require('../../shared/errors/AppError')
 // const JWT_SECRET = process.env.JWT_SECRET 
 
-const createUser = async (userData, tx = prisma) => {
+const createUser = async (userData, tx = null) => {
     const existing = await authRepository.findByUsername(userData.username);
     if(existing) {
         throw new AppError('Username already exists', 400);

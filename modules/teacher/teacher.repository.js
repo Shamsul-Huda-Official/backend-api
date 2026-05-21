@@ -1,7 +1,8 @@
 const { prisma } = require('../../shared/config/connection');
 
 const createTeacher = async (data, tx = prisma) => {
-    return await tx.teacher.create({ data })
+    const client = tx || prisma;
+    return await client.teacher.create({ data })
 }
 
 const bulkCreateTeacher = async (docs, tx = prisma) => {

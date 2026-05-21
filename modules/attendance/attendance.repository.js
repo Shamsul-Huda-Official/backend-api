@@ -1,6 +1,9 @@
 const { prisma } =  require('../../shared/config/connection');
 
-const bulkCreateAttendance = async (docs) => {
+const bulkCreateAttendance = async ({ docs }) => {
+    // console.log("DOCS DATA: ", docs);
+    console.log("Here is the JSON.stringify data: ", JSON.stringify(docs, null, 2));
+    
     return prisma.attendance.createMany({
         data: docs,
         skipDuplicates: true,

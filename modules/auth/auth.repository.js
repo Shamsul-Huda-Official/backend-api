@@ -9,7 +9,8 @@ const findById = async (id) => {
 }
 
 const createUser = async (userData, tx = prisma) => {
-    return await tx.auth.create({ data: userData });
+    const client = tx || prisma
+    return await client.auth.create({ data: userData });
 }
 
 module.exports = {

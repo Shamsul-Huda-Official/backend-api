@@ -43,7 +43,7 @@ exports.getTeacherById = asyncHandler(async (req, res) => {
 exports.updateTeacher = asyncHandler(async (req, res) => {
     const institutionId = req.user.institutionId;
 
-    const teacher = await teacherService.getTeacherById( req.params.id, institutionId, req.body );
+    const teacher = await teacherService.updateTeacher( req.params.id, institutionId, req.body );
     await invalidateCache('teacher:*')
     return successResponse(res, teacher, 'Teacher updated successfully.');
 });

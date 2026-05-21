@@ -5,7 +5,7 @@ const { successResponse } = require('../../shared/utils/responseFormatter');
 
 exports.createClass = asyncHandler(async (req, res) => {
     const institutionId = req.user.institutionId;
-    const data = await classService.createClass(req.body, institutionId);
+    const data = await classService.createClass({ ...req.body, institutionId });
     await invalidateCache('classes:*');
     return successResponse(res, data, "Class created successfully");
 });
