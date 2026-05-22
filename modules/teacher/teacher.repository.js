@@ -20,7 +20,7 @@ const getAllTeachers = async ({ institutionId }) => {
 }
 
 const getTeacherById = async (id, institutionId) => {
-    return await prisma.teacher.findUnique({
+    return await prisma.teacher.findFirst({
         where: {
             id,
             institutionId
