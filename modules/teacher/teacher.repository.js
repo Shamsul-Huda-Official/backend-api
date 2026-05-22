@@ -26,7 +26,7 @@ const getTeacherById = async (id, institutionId) => {
             institutionId
         },
         include: {
-            auth: true
+            user: true
         }
     })
 }
