@@ -24,12 +24,15 @@ const getTeacherById = async (id, institutionId) => {
         where: {
             id,
             institutionId
+        },
+        include: {
+            auth: true
         }
     })
 }
 
 const updateTeacher = async (id, institutionId, data) => {
-    return await prisma.teacher.update({
+    return await prisma.teacher.updateMany({
         where: {
             id, 
             institutionId
