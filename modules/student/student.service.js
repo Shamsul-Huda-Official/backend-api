@@ -80,8 +80,6 @@ const bulkCreateStudents = async ( {institutionId, classId, divisionId, students
 
 const getAllStudents = async ({ institutionId, classId, divisionId }) => {
     if ( !institutionId ) throw new AppError('institutionId is required.', 400);
-    if ( !classId ) throw new AppError('classId is required.', 400);
-    if ( !divisionId ) throw new AppError('divisionId is required.', 400);
 
     return await studentRepository.getAllStudents({
         institutionId,
