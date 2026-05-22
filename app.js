@@ -8,7 +8,10 @@ const errorMiddleware = require('./shared/middleware/error.middleware');
 
 app.use(cors())
 
-app.use(express.json());
+app.use(express.json({
+    origin: '*',
+    credentials: true,
+}));
 
 app.use('/api/v1', routes);
 
