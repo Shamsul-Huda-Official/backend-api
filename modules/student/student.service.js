@@ -41,9 +41,6 @@ const createStudent = async (data) => {
 };
 
 const bulkCreateStudents = async ( {institutionId, classId, divisionId, students} ) => {
-    if ( !students ) throw new AppError('Students are required.', 400);
-    if ( !institutionId ) throw new AppError('institutionId is required.', 400);
-
     return await prisma.$transaction(async (tx) => {
         const results = [];
         
