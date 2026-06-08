@@ -5,6 +5,7 @@ const createStudent = async (data, tx = prisma) => {
 }
 
 const bulkCreateStudent = async (docs, tx = prisma) => {
+    console.log(JSON.stringify(docs, null, 2))
     return await tx.student.createMany({
         data: docs,
     });
