@@ -11,6 +11,7 @@ exports.createStudent = asyncHandler(async (req, res) => {
 });
 
 exports.bulkCreateStudent = asyncHandler(async (req, res) => {
+    console.log(req.body)
     const institutionId = req.user.institutionId;
     const { classId, divisionId, students } = req.body;
 

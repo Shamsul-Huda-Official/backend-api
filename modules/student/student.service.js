@@ -55,7 +55,7 @@ const bulkCreateStudents = async ( {institutionId, classId, divisionId, students
                 institutionId
             }, tx);
 
-            const newStudent = await studentRepository.bulkCreateStudent({
+            const newStudent = await studentRepository.createStudent({
                 name: student.name,
                 admissionNumber: student.admissionNumber,
                 rollNumber: student.rollNumber,
@@ -63,8 +63,8 @@ const bulkCreateStudents = async ( {institutionId, classId, divisionId, students
                 email: student.email,
                 parentName: student.parentName,
                 institutionId,
-                classId,
-                divisionId,
+                classId: student.classId,
+                divisionId: student.divisionId,
                 userId: auth.id,
             }, tx);
             results.push(newStudent);
