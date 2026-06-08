@@ -38,14 +38,35 @@ const updateStudent = async (id, institutionId, data) => {
     });
 };
 
-const deleteStudent = async (id, institutionId) => {
-    return await prisma.student.delete({
+const deleteStudent = async (id, institutionId, tx = prisma) => {
+    const student = await tx.student.findFirst({
         where: {
-            id, 
-            institutionId
+            id,
+            institutionId,
+        },
+        select: {
+            id: true, 
+            userId: true,
+        }
+    })
+    if(!student) {
+        throw new Error('Student not found');
+    }
+    await tx.student.delete({
+        where: {
+            id: student.id,
         }
     });
-};
+
+    if (student.userId) {
+        await tx.auth.delete({
+            where: {
+                id: student.userId,
+            }
+        })
+    }
+    return student;
+};  
 
 module.exports = {
     createStudent, 

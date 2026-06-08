@@ -96,8 +96,14 @@ const updateStudent = async (id, institutionId, data) => {
 }
 
 const deleteStudent = async (id, institutionId) => {
-    return await studentRepository.deleteStudent(id, institutionId);
-}
+    return await prisma.$transaction(async (tx) => {
+        return await studentRepository.deleteStudent(
+            id,
+            institutionId,
+            tx
+        );
+    });
+};
 
 module.exports = {
     createStudent,
