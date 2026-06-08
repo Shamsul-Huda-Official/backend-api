@@ -4,8 +4,8 @@ const createStudent = async (data, tx = prisma) => {
     return await tx.student.create({ data })
 }
 
-const bulkCreateStudent = async (docs) => {
-    return await prisma.student.createMany({
+const bulkCreateStudent = async (docs, tx = prisma) => {
+    return await tx.student.createMany({
         data: docs,
     });
 };
