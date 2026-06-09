@@ -12,6 +12,39 @@ const createStudent = async (data) => {
     if ( !classId ) throw new AppError('classId is required.', 400);
     if ( !divisionId ) throw new AppError('divisionId is required.', 400);
 
+    const existingStudent = await studentRepository.findDuplicateStudent({
+        institutionId,
+        email,
+        phone,
+        admissionNumber
+    });
+
+    if ( existingStudent ) {
+        if ( existingStudent.email === email ) {
+            throw new AppError('Email already exists for another student.', 400);
+        }
+
+        if ( existingStudent.phone === phone ) {
+            throw new AppError('Phone number already exists for another student.', 400);
+        }
+
+        if ( existingStudent.admissionNumber === admissionNumber ) {
+            throw new AppError('Admission number already exists for another student.', 400);
+        }
+    } 
+
+    const existingRollNumber = await studentRepository.findRollNumber({
+        institutionId,
+        divisionId,
+        rollNumber
+    });
+
+    if ( existingRollNumber ) {
+        throw new AppError(
+            "Roll number already exists for another student in the same division.",
+            400
+        )
+    }
 
     return await prisma.$transaction(async (tx) => {
         const auth = await authService.createUser({

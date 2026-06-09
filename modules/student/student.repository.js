@@ -4,6 +4,29 @@ const createStudent = async (data, tx = prisma) => {
     return await tx.student.create({ data })
 }
 
+const findDuplicateStudent = async (institutionId, email, phone, admissionNumber) => {
+    return await prisma.student.findFirst({
+        where: {
+            institutionId,
+            OR: [
+                { phone },
+                { email },
+                { admissionNumber }
+            ]
+        }
+    })
+}
+
+const findRollNumber = async (institutionId, divisionId, rollNumber) => {
+    return await prisma.student.findFirst({
+        where: {
+            institutionId,
+            divisionId,
+            rollNumber
+        }
+    })
+}
+
 const bulkCreateStudent = async (docs, tx = prisma) => {
     console.log("DOCS:", JSON.stringify(docs, null, 2))
     return await tx.student.createMany({
@@ -70,6 +93,8 @@ const deleteStudent = async (id, institutionId, tx = prisma) => {
 
 module.exports = {
     createStudent, 
+    findDuplicateStudent,
+    findRollNumber,
     bulkCreateStudent,
     getAllStudents,
     getStudentById,
