@@ -18,6 +18,7 @@ const findDuplicateStudent = async ({ institutionId, email, phone, admissionNumb
 }
 
 const findRollNumber = async ({ institutionId, divisionId, rollNumber }) => {
+    console.log("DATAS:", institutionId, divisionId, rollNumber)
     return await prisma.student.findFirst({
         where: {
             institutionId,

@@ -207,7 +207,7 @@ model Student {
   id              String   @id @default(uuid())
   name            String
   admissionNumber String   @unique
-  rollNumber      String   @unique
+  rollNumber      String   
   phone           String   @unique
   email           String   @unique
   parentName      String
@@ -231,6 +231,7 @@ model Student {
   donations       Donation[]
 
   @@map("students")
+  @@unique([divisionId, rollNumber])
 }
 
 model Attendance {

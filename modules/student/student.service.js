@@ -18,7 +18,8 @@ const createStudent = async (data) => {
         phone,
         admissionNumber
     });
-
+    
+    console.log("DATAS:", institutionId, divisionId, rollNumber)
     if ( existingStudent ) {
         if ( existingStudent.email === email ) {
             throw new AppError('Email already exists for another student.', 400);
