@@ -1,14 +1,217 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Institution {
+  id          String       @id @default(uuid())
+  name        String
+  address     String
+  email       String       @unique
+  plan        Plan         @default(BASIC)
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  attendances Attendance[]
+  auths       Auth[]
+  classes     Class[]
+  divisions   Division[]
+  donations   Donation[]
+  periods     Period[]
+  students    Student[]
+  subjects    Subject[]
+  teachers    Teacher[]
+
+  @@map("institutions")
+}
+
+model Auth {
+  id                String       @id @default(uuid())
+  name              String
+  username          String       @unique
+  phone             String?      @unique
+  email             String?      @unique
+  password          String
+  role              Role         @default(USER)
+  isActive          Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  institutionId     String?
+  markedAttendances Attendance[]
+  institution       Institution? @relation(fields: [institutionId], references: [id])
+  student           Student?
+  teacher           Teacher?
+
+  @@map("auths")
+}
+
+model Class {
+  id            String       @id @default(uuid())
+  name          String
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  institutionId String
+  attendances   Attendance[]
+  institution   Institution  @relation(fields: [institutionId], references: [id])
+  divisions     Division[]
+  periods       Period[]
+  students      Student[]
+  subjects      Subject[]
+
+  @@unique([name, institutionId])
+  @@map("classes")
+}
+
+model Division {
+  id             String       @id @default(uuid())
+  name           String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  classId        String
+  institutionId  String
+  classTeacherId String?
+  attendances    Attendance[]
+  class          Class        @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classTeacher   Teacher?     @relation("DivisionClassTeacher", fields: [classTeacherId], references: [id])
+  institution    Institution  @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  periods        Period[]
+  students       Student[]
+  subjects       Subject[]
+
+  @@unique([name, classId])
+  @@map("divisions")
+}
+
+model Teacher {
+  id                   String      @id @default(uuid())
+  name                 String
+  phone                String
+  email                String      @unique
+  profileImageUrl      String?
+  profileImagePublicId String?
+  isActive             Boolean     @default(true)
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  institutionId        String
+  userId               String?     @unique
+  classDivisions       Division[]  @relation("DivisionClassTeacher")
+  periods              Period[]
+  institution          Institution @relation(fields: [institutionId], references: [id])
+  user                 Auth?       @relation(fields: [userId], references: [id])
+
+  @@map("teachers")
+}
+
+model Subject {
+  id            String      @id @default(uuid())
+  name          String
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  institutionId String
+  classId       String
+  divisionId    String
+  periods       Period[]
+  class         Class       @relation(fields: [classId], references: [id], onDelete: Cascade)
+  division      Division    @relation(fields: [divisionId], references: [id], onDelete: Cascade)
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  @@unique([name, classId, divisionId])
+  @@map("subjects")
+}
+
+model Period {
+  id            String       @id @default(uuid())
+  name          String
+  dayOfWeek     Int
+  length        Int
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  institutionId String
+  classId       String
+  divisionId    String
+  subjectId     String?
+  teacherId     String?
+  attendances   Attendance[]
+  class         Class        @relation(fields: [classId], references: [id], onDelete: Cascade)
+  division      Division     @relation(fields: [divisionId], references: [id], onDelete: Cascade)
+  institution   Institution  @relation(fields: [institutionId], references: [id])
+  subject       Subject?     @relation(fields: [subjectId], references: [id])
+  teacher       Teacher?     @relation(fields: [teacherId], references: [id])
+
+  @@map("periods")
+}
+
+model Student {
+  id              String       @id @default(uuid())
+  name            String
+  admissionNumber String       @unique
+  rollNumber      String
+  phone           String       @unique
+  email           String       @unique
+  parentName      String
+  isActive        Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  institutionId   String
+  classId         String
+  divisionId      String
+  userId          String?      @unique
+  attendances     Attendance[]
+  donations       Donation[]
+  class           Class        @relation(fields: [classId], references: [id])
+  division        Division     @relation(fields: [divisionId], references: [id], onDelete: Cascade)
+  institution     Institution  @relation(fields: [institutionId], references: [id])
+  user            Auth?        @relation(fields: [userId], references: [id])
+
+  @@unique([divisionId, rollNumber], map: "students_division_rollnumber_key")
+  @@map("students")
+}
+
+model Attendance {
+  id            String           @id @default(uuid())
+  date          DateTime         @db.Date
+  status        AttendanceStatus @default(PRESENT)
+  type          AttendanceType
+  purpose       String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  institutionId String
+  studentId     String
+  classId       String
+  divisionId    String
+  periodId      String?
+  markedById    String
+  class         Class            @relation(fields: [classId], references: [id])
+  division      Division         @relation(fields: [divisionId], references: [id])
+  institution   Institution      @relation(fields: [institutionId], references: [id])
+  markedBy      Auth             @relation(fields: [markedById], references: [id])
+  period        Period?          @relation(fields: [periodId], references: [id])
+  student       Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, date, type, periodId])
+  @@map("attendances")
+}
+
+model Donation {
+  id            String      @id @default(uuid())
+  amount        Float
+  date          DateTime    @db.Date
+  month         String
+  year          Int
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  studentId     String
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+  student       Student     @relation(fields: [studentId], references: [id])
+
+  @@map("donations")
 }
 
 enum Plan {
@@ -36,249 +239,4 @@ enum AttendanceType {
   MORNING
   AFTERNOON
   PERIOD
-}
-
-
-model Institution {
-  id          String   @id @default(uuid())
-  name        String
-  address     String
-  email       String   @unique
-  plan        Plan     @default(BASIC)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  auths        Auth[]
-  classes      Class[]
-  divisions    Division[]
-  teachers     Teacher[]
-  subjects     Subject[]
-  donations    Donation[]
-  periods      Period[]
-  students     Student[]
-  attendances  Attendance[]
-
-  @@map("institutions")
-}
-
-model Auth {
-  id            String   @id @default(uuid())
-  name          String
-  username      String   @unique
-  phone         String?  @unique
-  email         String?  @unique
-  password      String
-  role          Role     @default(USER)
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  institutionId         String?
-  institution           Institution?  @relation(fields: [institutionId], references: [id])
-
-  teacher               Teacher?
-  student               Student?
-  markedAttendances     Attendance[]
-
-  @@map("auths")
-}
-
-model Class {
-  id            String   @id @default(uuid())
-  name          String
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  institutionId String
-  institution   Institution @relation(fields: [institutionId], references: [id])
-
-  divisions     Division[]
-  subjects      Subject[]
-  periods       Period[]
-  students      Student[]
-  attendances   Attendance[]
-
-  @@unique([name, institutionId])
-  @@map("classes")
-}
-
-model Division {
-  id             String   @id @default(uuid())
-  name           String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  classId        String
-  class          Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
-
-  institutionId  String
-  institution    Institution @relation(fields: [institutionId], references: [id], onDelete: Cascade)
-
-  classTeacherId String?
-  classTeacher   Teacher? @relation("DivisionClassTeacher", fields: [classTeacherId], references: [id])
-
-  students       Student[]
-  subjects       Subject[]
-  periods        Period[]
-  attendances    Attendance[]
-
-  @@unique([name, classId])
-  @@map("divisions")
-}
-
-model Teacher {
-  id                   String   @id @default(uuid())
-  name                 String
-  phone                String
-  email                String   @unique
-  profileImageUrl      String?
-  profileImagePublicId String?
-  isActive             Boolean  @default(true)
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-
-  institutionId String
-  institution   Institution @relation(fields: [institutionId], references: [id])
-
-  userId        String?  @unique
-  user          Auth?    @relation(fields: [userId], references: [id])
-
-  classDivisions Division[] @relation("DivisionClassTeacher")
-  periods        Period[]
-
-  @@map("teachers")
-}
-
-// STEP 6 — admin creates subjects under class+division
-model Subject {
-  id            String   @id @default(uuid())
-  name          String
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  institutionId String
-  institution   Institution @relation(fields: [institutionId], references: [id])
-
-  classId       String
-  class         Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
-
-  divisionId    String
-  division      Division @relation(fields: [divisionId], references: [id], onDelete: Cascade)
-
-  periods       Period[]
-
-  @@unique([name, classId, divisionId])
-  @@map("subjects")
-}
-
-model Period {
-  id            String   @id @default(uuid())
-  name          String               
-  dayOfWeek     Int                  
-  length        Int                  
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  institutionId String
-  institution   Institution @relation(fields: [institutionId], references: [id])
-
-  classId       String
-  class         Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
-
-  divisionId    String
-  division      Division @relation(fields: [divisionId], references: [id], onDelete: Cascade)
-
-  subjectId     String?              
-  subject       Subject? @relation(fields: [subjectId], references: [id])
-
-  teacherId     String?              
-  teacher       Teacher? @relation(fields: [teacherId], references: [id])
-
-  attendances   Attendance[]
-
-  @@map("periods")
-}
-
-model Student {
-  id              String   @id @default(uuid())
-  name            String
-  admissionNumber String   @unique
-  rollNumber      String   
-  phone           String   @unique
-  email           String   @unique
-  parentName      String
-  isActive        Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  institutionId   String
-  institution     Institution @relation(fields: [institutionId], references: [id])
-
-  classId         String
-  class           Class    @relation(fields: [classId], references: [id])
-
-  divisionId      String
-  division        Division @relation(fields: [divisionId], references: [id], onDelete: Cascade)
-
-  userId          String?  @unique
-  user            Auth?    @relation(fields: [userId], references: [id])
-
-  attendances     Attendance[]
-  donations       Donation[]
-
-  @@map("students")
-  @@unique([divisionId, rollNumber])
-}
-
-model Attendance {
-  id            String           @id @default(uuid())
-  date          DateTime         @db.Date
-  status        AttendanceStatus @default(PRESENT)
-  type          AttendanceType   
-  purpose       String?
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
-
-  institutionId String
-  institution   Institution      @relation(fields: [institutionId], references: [id])
-
-  studentId     String
-  student       Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
-
-  classId       String
-  class         Class            @relation(fields: [classId], references: [id])
-
-  divisionId    String
-  division      Division         @relation(fields: [divisionId], references: [id])
-
-  periodId      String?          
-  period        Period?          @relation(fields: [periodId], references: [id])
-
-  markedById    String
-  markedBy      Auth             @relation(fields: [markedById], references: [id])
-
-  @@unique([studentId, date, type, periodId])
-  @@map("attendances")
-}
-
-model Donation {
-  id            String   @id @default(uuid())
-  amount        Float
-  date          DateTime @db.Date
-  month         String
-  year          Int
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  studentId     String
-  student       Student  @relation(fields: [studentId], references: [id])
-
-  institutionId String
-  institution   Institution @relation(fields: [institutionId], references: [id])
-
-  @@map("donations")
 }
