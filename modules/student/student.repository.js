@@ -4,7 +4,7 @@ const createStudent = async (data, tx = prisma) => {
     return await tx.student.create({ data })
 }
 
-const findDuplicateStudent = async (institutionId, email, phone, admissionNumber) => {
+const findDuplicateStudent = async ({ institutionId, email, phone, admissionNumber }) => {
     return await prisma.student.findFirst({
         where: {
             institutionId,
@@ -17,7 +17,7 @@ const findDuplicateStudent = async (institutionId, email, phone, admissionNumber
     })
 }
 
-const findRollNumber = async (institutionId, divisionId, rollNumber) => {
+const findRollNumber = async ({ institutionId, divisionId, rollNumber }) => {
     return await prisma.student.findFirst({
         where: {
             institutionId,
