@@ -1,3 +1,4 @@
+const { number } = require('joi');
 const { prisma } = require('../../shared/config/connection');
 const AppError = require('../../shared/errors/AppError');
 
@@ -13,20 +14,36 @@ const dayMap = {
 }
 const createPeriods = async (data) => {
     const { count, length, dayOfWeek, institutionId, classId, divisionId } = data;
-    if ( !count || !length || !dayOfWeek ) throw new AppError('All fields are required.', 400)
+    if (
+        count === undefined ||
+        length === undefined ||
+        dayOfWeek === undefined
+    ) throw new AppError('All fields are required.', 400)
     if( !institutionId ) throw new AppError('institutionId is required!', 400)
     if( !classId ) throw new AppError('classId is required!', 400)
     if( !divisionId ) throw new AppError('divisionId is required', 400)
 
-    const dayNumber = dayMap[dayOfWeek];
-    if (dayNumber === undefined) throw new AppError('Invalid day. Use Monday to Sunday', 400)
+    if (
+        typeof dayOfWeek !== "number" ||
+        dayOfWeek < 0 ||
+        dayOfWeek > 6
+    ) {
+        throw new AppError(
+            'Invalid day, Choose from Sunday to Saturday.', 400
+        )
+    }
+        
+        // console.log("Lookup result:", dayMap[dayOfWeek]);
+        //     console.log("Received dayOfWeek:", dayOfWeek);
+        // console.log("Type:", typeof dayOfWeek);
+        // console.log("dayMap:", dayMap);
 
     const periods = [];
     for (let i = 1; i <= count; i++) {
         periods.push({
             name: `${i}`,
             length,
-            dayOfWeek: dayNumber,
+            dayOfWeek,
             institutionId,
             classId,
             divisionId,
